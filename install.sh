@@ -85,8 +85,8 @@ ln -s /usr/scons/scons-2.4.1 /opt/scons
 # Install Mongo
 # --------------------------
 mkdir /usr/mongo && curl https://fastdl.mongodb.org/src/mongodb-src-r3.2.4.tar.gz | tar -xvz -C /usr/mongo
-cd /usr/mongo/mongo-r3.2.4 && scons -j 8 mongod mongo mongos && scons --prefix=/usr/local install
-ln -s /usr/mongo/mongo-r3.2.4 /opt/mongo
+cd /usr/mongo/mongodb-src-r3.2.4 && scons -j 8 mongod mongo mongos && scons --prefix=/usr/local install
+ln -s /usr/mongo/mongodb-src-r3.2.4 /opt/mongo
 adduser mongod
 mkdir /var/lib/mongo && chown mongod:mongod /var/lib/mongo
 mkdir /var/log/mongodb && touch /var/log/mongodb/mongod.log && chown mongod:mongod /var/log/mongodb/mongod.log
