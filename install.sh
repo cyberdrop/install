@@ -17,7 +17,7 @@
 
 # Add CyberDrop User
 # -----------------------
-adduser cyberdrop
+useradd cyberdrop
 
 
 
@@ -42,6 +42,13 @@ yum update -y
 mkdir /usr/git && curl https://codeload.github.com/git/git/tar.gz/v2.5.0 | tar -xvz -C /usr/git
 cd /usr/git/git-2.5.0 && make configure && ./configure && make all && make install
 ln -s /usr/git/git-2.5.0 /opt/git
+
+
+
+
+
+
+
 
 
 
@@ -432,3 +439,16 @@ chmod 600 /mnt/swap
 mkswap /mnt/swap
 swapon /mnt/swap
 sh -c 'echo "/mnt/swap none swap sw 0 0" >> /etc/fstab'
+
+
+
+
+
+
+
+
+
+
+Restart
+--------------
+shutdown -h now -r
