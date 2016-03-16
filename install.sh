@@ -87,11 +87,11 @@ ln -s /usr/scons/scons-2.4.1 /opt/scons
 mkdir /usr/mongo && curl https://fastdl.mongodb.org/src/mongodb-src-r3.2.4.tar.gz | tar -xvz -C /usr/mongo
 cd /usr/mongo/mongodb-src-r3.2.4 && scons -j 8 mongod mongo mongos && scons --prefix=/usr/local install
 ln -s /usr/mongo/mongodb-src-r3.2.4 /opt/mongo
-adduser mongod
+useradd mongod
 mkdir /var/lib/mongo && chown mongod:mongod /var/lib/mongo
 mkdir /var/log/mongodb && touch /var/log/mongodb/mongod.log && chown mongod:mongod /var/log/mongodb/mongod.log
 
-cat <<EOF >> /etc/init.d/mongod
+cat > /etc/init.d/mongod <<EOL
 #!/bin/bash
 
 # mongod - Startup script for mongod
@@ -230,9 +230,9 @@ case "$1" in
 esac
 
 exit $RETVAL
-EOF
+EOL
 
-cat <<EOF >> /etc/mongod.conf
+cat > /etc/mongod.conf <<EOL
 # mongod.conf
 
 # for documentation of all options, see:
@@ -277,11 +277,11 @@ net:
 #auditLog:
 
 #snmp:
-EOF
+EOL
 
-cat <<EOF >> /etc/sysconfig/mongod
+cat > /etc/sysconfig/mongod <<EOL
 # TODO: add relevant configuration stuff here.
-EOF
+EOL
 
 chmod 644 /etc/mongod.conf
 chmod 644 /etc/sysconfig/mongod
@@ -304,7 +304,7 @@ chkconfig mongod --level 345 on
 # (https://docs.mongodb.org/manual/reference/ulimit/)
 sed -i 's/*          soft    nproc     4096/*          soft    nproc     32000/' /etc/security/limits.d/20-nproc.conf
 
-cat <<EOF >> /etc/init.d/disable-transparent-hugepages
+cat > /etc/init.d/disable-transparent-hugepages <<EOL
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          disable-transparent-hugepages
@@ -334,19 +334,19 @@ case $1 in
     unset thp_path
     ;;
 esac
-EOF
+EOL
 
 chmod 755 /etc/init.d/disable-transparent-hugepages
 chkconfig --add disable-transparent-hugepages
 mkdir /etc/tuned/no-thp
 
-cat <<EOF >> /etc/tuned/no-thp/tuned.conf
+cat > /etc/tuned/no-thp/tuned.conf <<EOL
 [main]
 include=virtual-guest
 
 [vm]
 transparent_hugepages=never
-EOF
+EOL
 
 chmod 644 /etc/tuned/no-thp/tuned.conf
 tuned-adm profile no-thp
