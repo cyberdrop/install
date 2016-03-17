@@ -422,8 +422,8 @@ echo -e "cyberdrop\tALL=(ALL)\tNOPASSWD: /usr/local/bin/qemu-system-x86_64" >> /
 
 
 
-Set Server Timezone
---------------
+# Set Server Timezone
+# --------------
 timedatectl set-timezone America/New_York
 systemctl start ntpd
 systemctl enable ntpd
@@ -437,8 +437,8 @@ systemctl enable ntpd
 
 
 
-Enable Swap File
---------------
+# Enable Swap File
+# --------------
 dd if=/dev/zero of=/mnt/swap bs=1024 count=33554432
 chmod 600 /mnt/swap
 mkswap /mnt/swap
@@ -454,8 +454,8 @@ sh -c 'echo "/mnt/swap none swap sw 0 0" >> /etc/fstab'
 
 
 
-Clear Bash History
---------------
+# Clear Bash History
+# --------------
 cat /dev/null > ~/.bash_history && history -c
 
 
@@ -467,6 +467,6 @@ cat /dev/null > ~/.bash_history && history -c
 
 
 
-Restart
---------------
+# Restart
+# --------------
 shutdown -h now -r
