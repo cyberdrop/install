@@ -91,7 +91,7 @@ useradd mongod
 mkdir /var/lib/mongo && chown mongod:mongod /var/lib/mongo
 mkdir /var/log/mongodb && touch /var/log/mongodb/mongod.log && chown mongod:mongod /var/log/mongodb/mongod.log
 
-cat > /etc/init.d/mongod <<EOL
+read -d '' out <<"EOL"
 #!/bin/bash
 
 # mongod - Startup script for mongod
@@ -110,7 +110,7 @@ cat > /etc/init.d/mongod <<EOL
 # NOTE: if you change any OPTIONS here, you get what you pay for:
 # this script assumes all options are in the config file.
 CONFIGFILE="/etc/mongod.conf"
-OPTIONS=" -f $CONFIGFILE"
+OPTIONS=" -f \$CONFIGFILE"
 SYSCONFIG="/etc/sysconfig/mongod"
 
 PIDFILEPATH=\`awk -F'[:=]' -v IGNORECASE=1 '/^[[:blank:]]*(processManagement\.)?pidfilepath[[:blank:]]*[:=][[:blank:]]*/{print $2}' "$CONFIGFILE" | tr -d "[:blank:]\"'"\`
@@ -231,8 +231,9 @@ esac
 
 exit $RETVAL
 EOL
+echo "${out}" > /etc/init.d/mongod
 
-cat > /etc/mongod.conf <<EOL
+read -d '' out <<"EOL"
 # mongod.conf
 
 # for documentation of all options, see:
@@ -278,10 +279,12 @@ net:
 
 #snmp:
 EOL
+echo "${out}" > /etc/mongod.conf
 
-cat > /etc/sysconfig/mongod <<EOL
+read -d '' out <<"EOL"
 # TODO: add relevant configuration stuff here.
 EOL
+echo "${out}" > /etc/sysconfig/mongod
 
 chmod 644 /etc/mongod.conf
 chmod 644 /etc/sysconfig/mongod
@@ -304,7 +307,7 @@ chkconfig mongod --level 345 on
 # (https://docs.mongodb.org/manual/reference/ulimit/)
 sed -i 's/*          soft    nproc     4096/*          soft    nproc     32000/' /etc/security/limits.d/20-nproc.conf
 
-cat > /etc/init.d/disable-transparent-hugepages <<EOL
+read -d '' out <<"EOL"
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          disable-transparent-hugepages
@@ -335,18 +338,20 @@ case $1 in
     ;;
 esac
 EOL
+echo "${out}" > /etc/init.d/disable-transparent-hugepages
 
 chmod 755 /etc/init.d/disable-transparent-hugepages
 chkconfig --add disable-transparent-hugepages
 mkdir /etc/tuned/no-thp
 
-cat > /etc/tuned/no-thp/tuned.conf <<EOL
+read -d '' out <<"EOL"
 [main]
 include=virtual-guest
 
 [vm]
 transparent_hugepages=never
 EOL
+echo "${out}" > /etc/tuned/no-thp/tuned.conf
 
 chmod 644 /etc/tuned/no-thp/tuned.conf
 tuned-adm profile no-thp
