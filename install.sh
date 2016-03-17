@@ -113,7 +113,7 @@ CONFIGFILE="/etc/mongod.conf"
 OPTIONS=" -f $CONFIGFILE"
 SYSCONFIG="/etc/sysconfig/mongod"
 
-PIDFILEPATH=`awk -F'[:=]' -v IGNORECASE=1 '/^[[:blank:]]*(processManagement\.)?pidfilepath[[:blank:]]*[:=][[:blank:]]*/{print $2}' "$CONFIGFILE" | tr -d "[:blank:]\"'"`
+PIDFILEPATH=\`awk -F'[:=]' -v IGNORECASE=1 '/^[[:blank:]]*(processManagement\.)?pidfilepath[[:blank:]]*[:=][[:blank:]]*/{print $2}' "$CONFIGFILE" | tr -d "[:blank:]\"'"\`
 
 mongod=${MONGOD-/usr/local/bin/mongod}
 
@@ -124,7 +124,7 @@ if [ -f "$SYSCONFIG" ]; then
     . "$SYSCONFIG"
 fi
 
-PIDDIR=`dirname $PIDFILEPATH`
+PIDDIR=\`dirname $PIDFILEPATH\`
 
 # Handle NUMA access to CPUs (SERVER-3574)
 # This verifies the existence of numactl as well as testing that the command works
@@ -185,7 +185,7 @@ mongo_killproc()
   local procname=$2
   local -i delay=300
   local -i duration=10
-  local pid=`pidofproc -p "${pid_file}" ${procname}`
+  local pid=\`pidofproc -p "${pid_file}" ${procname}\`
 
   kill -TERM $pid >/dev/null 2>&1
   usleep 100000
@@ -439,6 +439,19 @@ chmod 600 /mnt/swap
 mkswap /mnt/swap
 swapon /mnt/swap
 sh -c 'echo "/mnt/swap none swap sw 0 0" >> /etc/fstab'
+
+
+
+
+
+
+
+
+
+
+Clear Bash History
+--------------
+cat /dev/null > ~/.bash_history && history -c
 
 
 
