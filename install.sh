@@ -113,7 +113,7 @@ CONFIGFILE="/etc/mongod.conf"
 OPTIONS=" -f \$CONFIGFILE"
 SYSCONFIG="/etc/sysconfig/mongod"
 
-PIDFILEPATH=\`awk -F'[:=]' -v IGNORECASE=1 '/^[[:blank:]]*(processManagement\.)?pidfilepath[[:blank:]]*[:=][[:blank:]]*/{print $2}' "$CONFIGFILE" | tr -d "[:blank:]\"'"\`
+PIDFILEPATH=\`awk -F'[:=]' -v IGNORECASE=1 '/^[[:blank:]]*(processManagement\.)?pidfilepath[[:blank:]]*[:=][[:blank:]]*/{print $2}' "$CONFIGFILE" | tr -d "[:blank:]\\"'"\`
 
 mongod=${MONGOD-/usr/local/bin/mongod}
 
