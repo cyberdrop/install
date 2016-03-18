@@ -469,4 +469,4 @@ cat /dev/null > ~/.bash_history && history -c
 
 # Run Tests
 # --------------
-./test.sh
+bash <(curl -s https://raw.githubusercontent.com/cyberdrop/install/master/test.sh)
