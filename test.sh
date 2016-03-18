@@ -15,3 +15,4 @@ fail()
     printf '%s%*s%s' "$RED" $col "[FAIL]" "$NORMAL"
 }
 
+fail
