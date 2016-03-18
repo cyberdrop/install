@@ -17,7 +17,7 @@ fail()
 
 ## Test 1: cyberdrop user properly created
 TEST_NAME="cyberdrop User Exists"
-if id -u "$1" >/dev/null 2>&1; then
+if id -u cyberdrop >/dev/null 2>&1; then
 	pass $TEST_CNT "$TEST_NAME"
 else
 	fail $TEST_CNT "$TEST_NAME"

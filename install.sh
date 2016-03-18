@@ -439,7 +439,9 @@ systemctl enable ntpd
 
 # Enable Swap File
 # --------------
+echo "Creating 32GB Swap File, this will take a few mins..."
 dd if=/dev/zero of=/mnt/swap bs=1024 count=33554432
+echo "Finished Creating Swap File"
 chmod 600 /mnt/swap
 mkswap /mnt/swap
 swapon /mnt/swap
@@ -467,6 +469,19 @@ cat /dev/null > ~/.bash_history && history -c
 
 
 
+# Restart
+# --------------
+shutdown -h now -r
+
+
+
+
+
+
+
+
+
+
 # Run Tests
 # --------------
-bash <(curl -s https://raw.githubusercontent.com/cyberdrop/install/master/test.sh)
+# bash <(curl -s https://raw.githubusercontent.com/cyberdrop/install/master/test.sh)
