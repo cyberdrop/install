@@ -467,6 +467,6 @@ cat /dev/null > ~/.bash_history && history -c
 
 
 
-# Restart
+# Run Tests
 # --------------
-shutdown -h now -r
+./test.sh
