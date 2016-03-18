@@ -371,7 +371,7 @@ tuned-adm profile no-thp
 mkdir /usr/qemu && curl http://iweb.dl.sourceforge.net/project/kvm/qemu-kvm/1.2.0/qemu-kvm-1.2.0.tar.gz | tar -xvz -C /usr/qemu
 sed -i 's/LIBS+=-lz $(LIBS_TOOLS)/LIBS+=-lz -lrt $(LIBS_TOOLS)/' /usr/qemu/qemu-kvm-1.2.0/Makefile
 sed -i 's/qemu-ga\$(EXESUF): LIBS = \$(LIBS_QGA)/qemu-ga\$(EXESUF): LIBS = \$(LIBS_QGA) -lrt/' /usr/qemu/qemu-kvm-1.2.0/Makefile
-sed -i '/STPFILES=/a\\nLIBS+=-lrt/' /usr/qemu/qemu-kvm-1.2.0/Makefile.target
+sed -i '/STPFILES=/a\\nLIBS+=-lrt' /usr/qemu/qemu-kvm-1.2.0/Makefile.target
 cd /usr/qemu/qemu-kvm-1.2.0 && ./configure && make && make install
 
 

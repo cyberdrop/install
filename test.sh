@@ -1,18 +1,14 @@
 #!/bin/bash
 
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-NORMAL=$(tput sgr0)
-col=$(tput cols)
-
-success()
+pass()
 {
-    printf '%s%*s%s' "$GREEN" $col "[OK]" "$NORMAL"
+    printf '%-50s\033[32m%s\033[0m%s\n' "$1" "[PASS]"
 }
 
 fail()
 {
-    printf '%s%*s%s' "$RED" $col "[FAIL]" "$NORMAL"
+    printf '%-50s\033[31m%s\033[0m%s\n' "$1" "[FAIL]"
 }
 
-fail
+fail "Testing a failure"
+pass "Testing a pass"
