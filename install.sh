@@ -8,7 +8,7 @@
 
 # Get Wireless Working and Run Install Script
 # -----------------------
-# wpa_supplicant -B -dd -i wlp2s0 -c <(wpa_passphrase Chad Suncatcher2012) && dhclient wlp2s0 enp3s0 -v
+# wpa_supplicant -B -dd -i wlp2s0 -c <(wpa_passphrase Chad Suncatcher2012) && dhclient wlp2s0 -v
 # bash <(curl -s https://raw.githubusercontent.com/cyberdrop/install/master/install.sh)
 
 
@@ -484,4 +484,5 @@ shutdown -h now -r
 
 # Run Tests
 # --------------
+# wpa_supplicant -B -dd -i wlp2s0 -c <(wpa_passphrase Chad Suncatcher2012) && dhclient wlp2s0 -v
 # bash <(curl -s https://raw.githubusercontent.com/cyberdrop/install/master/test.sh)
