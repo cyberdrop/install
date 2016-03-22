@@ -25,7 +25,7 @@ useradd cyberdrop
 
 # Install Dependencies
 # -----------------------
-yum install -y autoconf gcc-c++ zlib-devel perl-devel openssl-devel glib2-devel ntp yajl-devel libxml2-devel device-mapper-devel libpciaccess-devel libnl-devel
+yum install -y autoconf gcc-c++ bzip2 automake libtool zlib-devel perl-devel openssl-devel glib2-devel ntp yajl-devel libxml2-devel device-mapper-devel libpciaccess-devel libnl-devel
 yum update -y
 
 
@@ -368,11 +368,8 @@ tuned-adm profile no-thp
 # Install QEMU
 # sed statements apply patch
 # ---------------------------
-mkdir /usr/qemu && curl http://iweb.dl.sourceforge.net/project/kvm/qemu-kvm/1.2.0/qemu-kvm-1.2.0.tar.gz | tar -xvz -C /usr/qemu
-sed -i 's/LIBS+=-lz $(LIBS_TOOLS)/LIBS+=-lz -lrt $(LIBS_TOOLS)/' /usr/qemu/qemu-kvm-1.2.0/Makefile
-sed -i 's/qemu-ga\$(EXESUF): LIBS = \$(LIBS_QGA)/qemu-ga\$(EXESUF): LIBS = \$(LIBS_QGA) -lrt/' /usr/qemu/qemu-kvm-1.2.0/Makefile
-sed -i '/STPFILES=/a\\nLIBS+=-lrt' /usr/qemu/qemu-kvm-1.2.0/Makefile.target
-cd /usr/qemu/qemu-kvm-1.2.0 && ./configure && make && make install
+mkdir /usr/qemu && curl http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2 | tar -xvj -C /usr/qemu
+cd /usr/qemu/qemu-2.5.0 && ./configure --targetlist=x86_64-softmmu && make && make install
 
 
 
