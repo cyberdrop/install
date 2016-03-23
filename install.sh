@@ -369,7 +369,7 @@ tuned-adm profile no-thp
 # sed statements apply patch
 # ---------------------------
 mkdir /usr/qemu && curl http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2 | tar -xvj -C /usr/qemu
-cd /usr/qemu/qemu-2.5.0 && ./configure --targetlist=x86_64-softmmu && make && make install
+cd /usr/qemu/qemu-2.5.0 && ./configure --target-list=x86_64-softmmu && make && make install
 
 
 
